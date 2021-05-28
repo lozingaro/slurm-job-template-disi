@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --job-name=job1
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=stefanopio.zingaro@unibo.it
+#SBATCH --partition=test
+#SBATCH --time=00:01:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --output=/home/phd-students/stefanopio.zingaro/Developer/job1/test/single_node.log
+#SBATCH --gres=gpu:1
+
+hostname -f 
+sleep 5
+nvidia-smi
+sleep 5
+bash /home/phd-students/stefanopio.zingaro/Developer/job1/test/slurm.sh
+
