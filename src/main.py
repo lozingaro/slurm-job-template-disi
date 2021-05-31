@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+This script test if any GPU is seen by the framework,
+it assumes that Pytorch >= 1.8 is installed in the Python environment.
+"""
+
 import sys
 import torch
 
