@@ -10,7 +10,7 @@ In caso di necessità di maggiore spazio potrai ricorrere alla creazione di una 
 
 ## Istruzioni
 
-Una possibile impostazione del lavoro potrebbe essere quella di creare un virtual environment Python inserendo all'interno tutto ciò di cui si ha bisogno e utilizzando pip per l'installazione dei moduli necessari. Le segnalo che per utilizzare **Python 3** è necessario invocarlo esplicitamente in quanto sulle macchine il default è **Python 2**. 
+Una possibile impostazione del lavoro potrebbe essere quella di creare un virtual environment Python utilizzando `virtualenv` e inserendo all'interno tutto ciò di cui si ha bisogno e utilizzando pip per l'installazione dei moduli necessari. Le segnalo che per utilizzare **Python 3** è necessario invocarlo esplicitamente in quanto sulle macchine il default è **Python 2**. 
 Nel cluster sono presenti **GPU** **Tesla** pilotate con driver `Nvidia v. 460.67` e librerie di computazione `CUDA 11.2.1`, quindi in caso di installazione di pytorch bisognerà utilizzare il comando 
 
 ```bash
