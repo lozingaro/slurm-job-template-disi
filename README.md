@@ -12,10 +12,17 @@ In caso di necessità di maggiore spazio potrai ricorrere alla creazione di una 
 
 `/home/` utente e `/public/` sono spazi di archiviazione condivisi tra le macchine, potrai dunque creare l'ambiente di esecuzione e i file necessari all'elaborazione sulla macchina **SLURM** ([slurm.cs.unibo.it](http://slurm..cs.unibo.it)) da cui poi avviare il *job* che verrà eseguito sulle macchine dotate di GPU.
 
-## Istruzioni
+## Istruzioni 
 
-Una possibile impostazione del lavoro potrebbe essere quella di creare un virtual environment Python (ad esempio usando il comando `virtualenv`) e inserendo all'interno tutto ciò di cui si ha bisogno e utilizzando pip per l'installazione dei moduli necessari. Le segnalo che per utilizzare **Python 3** è necessario invocarlo esplicitamente in quanto sulle macchine il default è **Python 2**. 
-Nel cluster sono presenti **GPU** **Tesla** pilotate con driver `Nvidia v. 460.67` e librerie di computazione `CUDA 11.2.1`, quindi in caso di installazione di pytorch bisognerà utilizzare il comando 
+Una possibile impostazione del lavoro potrebbe essere 
+1. creare un virtual environment Python (ad esempio usando il comando `virtualenv`);
+2. inserre all'interno del `virtualenv environment` tutto ciò di cui si ha bisogno (dati, etc.);
+3. Installare altri moduli necessari con `pip` (gestori di paccheti).
+
+### Note
+
+Per usare **Python 3** è necessario invocarlo esplicitamente in quanto sulle macchine il default è **Python 2**. 
+Nel cluster sono presenti **GPU** **Tesla** pilotate con driver `Nvidia v. 460.67` e librerie di computazione `CUDA 11.2.1`, quindi in caso di installazione di pytorch bisognerà utilizzare il comando:
 
 ```bash
 pip3 install torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
