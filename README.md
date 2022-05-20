@@ -1,6 +1,6 @@
 **Il repository è aperto a contributi, basta aprire una [`pull request`](https://github.com/thezingaro/slurm-job-template-disi/pulls)!**
 
-**Repository is opern to contributions, please open a [`pull request`](https://github.com/thezingaro/slurm-job-template-disi/pulls)!**
+**Repository is open to contributions, please open a [`pull request`](https://github.com/thezingaro/slurm-job-template-disi/pulls)!**
 
 ## Cluster di HPC con GPU per esperimenti di calcolo (draft version 1.0)
 
