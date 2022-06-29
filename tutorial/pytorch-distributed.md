@@ -28,6 +28,8 @@ export MASTER_PORT=29500
 master_addr=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
 export MASTER_ADDR=$master_addr
 
+export NCCL_SOCKET_IFNAME=eth0
+
 srun python3 main.py
 ```
 
