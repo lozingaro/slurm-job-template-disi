@@ -1,14 +1,13 @@
-## Pytorch Distributed su Slurm
+# Pytorch Distributed su Slurm
 
 Pytorch distributed mette a disposizione delle primitive di comunicazione tra le GPU; in questo modo è possibile allenare un singolo modello in modo distribuito.
-Per maggiori informazioni: https://pytorch.org/docs/stable/distributed.html
+Per maggiori informazioni circa Pytorch distributed [visitate questo link](https://pytorch.org/docs/stable/distributed.html).
 
-
+<!-- che cos'è questo esempio, in che file dovrebbe stare? TODO spostare codice e mettere un titolo -->
 Per lanciare uno stesso script su più nodi, settate opportunamente il vostro sbatch, settando il numero di nodi e il numero di GPU per nodo.
 Per lanciare lo stesso script su più nodi, dovete aggiungere `srun` al vostro comando. Inoltre, PyTorch distributed ha bisongo di due variabili environment, `MASTER_PORT` e `MASTER_ADDR`.
 La prima può essere una qualsiasi porta libera; nel caso sia già occupata riceverete un errore. il `MASTER_ADDR` deve essere l'indirizzo di un nodo, in modo che le GPU possano comunicare.
 Nell'esempio sottostante, settiamo `MASTER_PORT` a 29500 e `MASTER_ADDR` con il nome del primo nodo in `SLURM_JOB_NODELIST`.
-
 
 ```batch
 #!/bin/bash
@@ -33,7 +32,7 @@ export NCCL_SOCKET_IFNAME=eth0
 srun python3 main.py
 ```
 
-
+<!-- quale file python? TODO spostare il codice e mettere un titolo per questo paragrafo. -->
 Nel vostro file python, ricordate di lanciare un processo diverso per ogni GPU sullo stesso nodo e di inizializzare `torch.distributed`.
 Un esempio minimale è il seguente:
 
