@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>slurm-job-template-disi — lozingaro</title>
+  <meta name="description" content="template per sottomettere job al cluster SLURM del DISI, Università di Bologna">
+  <style>
+    :root{--bg:#0C0914;--surface:#181430;--border:#2D2860;--border-hi:#5B3A9A;--text:#EAE4F0;--dim:#9888B8;--accent:#C85A30;--warm:#D49820;--cool:#6898C8;--violet:#9878D8}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.75;min-height:100vh;display:flex;flex-direction:column}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+    .wrapper{max-width:660px;margin:0 auto;padding:0 1.5rem;width:100%}
+    header{padding:3.5rem 0 2rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    header::after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0,transparent 2px,rgba(92,58,154,.06) 2px,rgba(92,58,154,.06) 3px)}
+    .eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:.75rem}
+    .eyebrow a{color:var(--dim);text-decoration:none;border-bottom:1px dotted var(--dim);transition:color .12s,border-color .12s}
+    .eyebrow a:hover{color:var(--warm);border-color:var(--warm)}
+    h1{font-size:clamp(1.6rem,6vw,2.8rem);font-weight:normal;color:var(--accent);letter-spacing:-.02em;line-height:1.1;margin-bottom:.5rem;position:relative;z-index:1}
+    .tagline{color:var(--dim);font-size:.88rem;letter-spacing:.04em;position:relative;z-index:1}
+    .header-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.75rem;font-size:.76rem;color:var(--dim);position:relative;z-index:1}
+    .header-meta a{color:var(--cool);text-decoration:none;border-bottom:1px dashed var(--cool);transition:color .1s,border-color .1s}
+    .header-meta a:hover{color:var(--warm);border-color:var(--warm)}
+    main{flex:1;padding:2.5rem 0}
+    section{margin-bottom:2.5rem}
+    .section-label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);padding-left:.55rem;border-left:2px solid var(--accent);margin-bottom:1rem}
+    p{margin-bottom:.9rem}
+    ul,ol{padding-left:1.5rem;margin-bottom:.9rem}
+    li{margin-bottom:.3rem}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:color .1s,border-color .1s}
+    a:visited{color:var(--violet)}
+    a:hover{color:var(--warm);border-bottom-color:var(--warm)}
+    pre{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--violet);padding:1rem 1.25rem;overflow-x:auto;color:var(--warm);font-size:.85rem;line-height:1.5;margin:1rem 0}
+    code{background:var(--surface);color:var(--warm);padding:.1em .35em;font-size:.9em}
+    pre code{background:none;padding:0}
+    .citation{position:relative;border:1px dashed var(--border-hi);padding:1.3rem 1.5rem;font-size:.82rem;color:var(--dim);line-height:1.65;margin-bottom:.5rem}
+    .citation-label{position:absolute;top:-.55rem;left:1rem;background:var(--bg);padding:0 .4rem;font-size:.67rem;letter-spacing:.13em;text-transform:uppercase;color:var(--border-hi)}
+    .citation em{color:var(--text)}
+    .citation a{color:var(--cool);border-bottom:1px dashed var(--cool)}
+    .greeting{border-top:1px dotted var(--border);padding-top:1.5rem;margin-bottom:2rem;font-size:.85rem;color:var(--dim);font-style:italic}
+    .greeting strong{color:var(--text);font-style:normal;font-weight:normal}
+    .divider{display:flex;align-items:center;gap:.75rem;color:var(--border-hi);font-size:.7rem;letter-spacing:.2em;margin:2rem 0}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    footer{border-top:1px solid var(--border);padding:1.25rem 0;font-size:.76rem;color:var(--dim)}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+    footer a{color:var(--dim);border-bottom:1px dotted var(--dim)}
+    footer a:hover{color:var(--warm);border-color:var(--warm)}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <p class="eyebrow"><a href="https://lozingaro.github.io">← lozingaro</a></p>
+    <h1>slurm-job-template-disi</h1>
+    <p class="tagline">template per il cluster SLURM del DISI — Università di Bologna</p>
+    <div class="header-meta">
+      <span>autore: <a href="https://lozingaro.github.io">Stefano Pio Zingaro</a></span>
+      <span>repo: <a href="https://github.com/lozingaro/slurm-job-template-disi">github</a></span>
+      <span>licenza: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></span>
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <p class="section-label">descrizione</p>
+      <p>Template e script di esempio per sottomettere job al cluster SLURM installato presso il <a href="https://disi.unibo.it">Dipartimento di Informatica — Scienza e Ingegneria (DISI)</a> dell'Università di Bologna.</p>
+      <p>Raccoglie configurazioni tipiche per job CPU/GPU, gestione dell'ambiente Python, e buone pratiche per l'uso efficiente delle risorse condivise.</p>
+    </section>
+
+    <section>
+      <p class="section-label">utilizzo rapido</p>
+      <pre><code>git clone https://github.com/lozingaro/slurm-job-template-disi
+cd slurm-job-template-disi
+# modifica job.sh con i tuoi parametri
+sbatch job.sh</code></pre>
+    </section>
+
+    <section>
+      <p class="section-label">parametri principali</p>
+      <ul>
+        <li><code>--partition</code> — coda di esecuzione (es. <code>gpu</code>, <code>cpu</code>)</li>
+        <li><code>--gres=gpu:1</code> — richiesta GPU</li>
+        <li><code>--time</code> — limite di tempo (formato <code>HH:MM:SS</code>)</li>
+        <li><code>--mem</code> — memoria RAM richiesta</li>
+      </ul>
+    </section>
+
+    <div class="divider">· · ·</div>
+
+    <section>
+      <p class="section-label">cita questo lavoro</p>
+      <div class="citation">
+        <span class="citation-label">citazione</span>
+        Zingaro, S. P. (2024). <em>SLURM Job Template DISI</em> [Template]. GitHub. <a href="https://github.com/lozingaro/slurm-job-template-disi">github.com/lozingaro/slurm-job-template-disi</a>
+      </div>
+    </section>
+
+    <div class="greeting">
+      <strong>a tutti i dottorandi del DISI.</strong><br>
+      spero che questo template faccia risparmiare qualche ora. se trovi errori o vuoi aggiungere configurazioni utili, apri una issue o una pull request.
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a> — Stefano Pio Zingaro, 2026</span>
+      <span><a href="https://lozingaro.github.io">lozingaro.github.io</a></span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
